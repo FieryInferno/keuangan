@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keuangan/components/button_pin.dart';
 import 'package:keuangan/components/circle_pin.dart';
 import 'package:keuangan/components/text_widget.dart';
 
@@ -31,6 +32,30 @@ class Login extends StatelessWidget {
     return data;
   }
 
+  List<Container> loadButtonPin() {
+    List<Container> data = [];
+    List<ButtonPin> dataTemp = [];
+
+    for (var i = 1; i <= 10; i++) {
+      if (dataTemp.length == 3 || i == 10) {
+        data.add(
+          Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: dataTemp,
+            ),
+          ),
+        );
+        dataTemp = [];
+      }
+
+      dataTemp.add(ButtonPin(i));
+    }
+
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,36 +80,54 @@ class Login extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10, bottom: 20),
+            margin: const EdgeInsets.only(top: 10, bottom: 80),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: loadCirclePin(),
             ),
           ),
-          Row(
+          Column(
             children: [
+              ...loadButtonPin(),
               Container(
-                height: 75,
-                width: 75,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(75),
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    SizedBox(width: 75),
+                    ButtonPin(0),
+                    SizedBox(
+                      height: 75,
+                      width: 75,
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 50,
+                      ),
                     ),
-                    color: Colors.amber[200],
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromARGB(121, 0, 0, 0),
-                          blurRadius: 10,
-                          spreadRadius: 0.5,
-                          offset: Offset(0, 5)),
-                    ]),
-                margin: const EdgeInsets.only(right: 10),
-                child: const Center(
-                  child: TextWidget('1', size: 40),
+                  ],
                 ),
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(16),
+                  ),
+                ),
+                child: const TextWidget('Gunakan Password'),
+              ),
+            ],
+          )
         ],
       ),
     );
