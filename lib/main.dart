@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:keuangan/circle_pin.dart';
+import 'package:keuangan/components/circle_pin.dart';
+import 'package:keuangan/components/text_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,22 +45,46 @@ class Login extends StatelessWidget {
       ),
       child: Column(
         children: [
+          const Text(
+            'Masukan PIN kamu',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              decoration: TextDecoration.none,
+            ),
+          ),
           Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: const Text(
-              'Masukan PIN kamu',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                decoration: TextDecoration.none,
-              ),
+            margin: const EdgeInsets.only(top: 10, bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: loadCirclePin(),
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: loadCirclePin(),
-          )
+            children: [
+              Container(
+                height: 75,
+                width: 75,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(75),
+                    ),
+                    color: Colors.amber[200],
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color.fromARGB(121, 0, 0, 0),
+                          blurRadius: 10,
+                          spreadRadius: 0.5,
+                          offset: Offset(0, 5)),
+                    ]),
+                margin: const EdgeInsets.only(right: 10),
+                child: const Center(
+                  child: TextWidget('1', size: 40),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
