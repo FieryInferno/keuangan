@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:keuangan/components/button_pin.dart';
 import 'package:keuangan/components/circle_pin.dart';
 import 'package:keuangan/components/text_widget.dart';
+import 'package:keuangan/pin_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +15,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Login(),
+    return MaterialApp(
+      home: Scaffold(
+        body: ChangeNotifierProvider(
+          create: (context) => PinModel(),
+          child: const Login(),
+        ),
+      ),
     );
   }
 }
@@ -22,10 +29,14 @@ class MyApp extends StatelessWidget {
 class Login extends StatelessWidget {
   const Login({super.key});
 
-  List<CirclePin> loadCirclePin() {
+  List<CirclePin> loadCirclePin(int length) {
     List<CirclePin> data = [];
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < length; i++) {
+      data.add(const CirclePin(isActive: true));
+    }
+
+    for (var i = 0; i < 6 - length; i++) {
       data.add(const CirclePin());
     }
 
@@ -81,9 +92,13 @@ class Login extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10, bottom: 80),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: loadCirclePin(),
+            child: Consumer<PinModel>(
+              builder: (context, value, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: loadCirclePin(value.pin.length),
+                );
+              },
             ),
           ),
           Column(
@@ -93,15 +108,19 @@ class Login extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    SizedBox(width: 75),
-                    ButtonPin(0),
-                    SizedBox(
-                      height: 75,
-                      width: 75,
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 50,
+                  children: [
+                    const SizedBox(width: 75),
+                    const ButtonPin(0),
+                    GestureDetector(
+                      onTap: () => Provider.of<PinModel>(context, listen: false)
+                          .delete(),
+                      child: const SizedBox(
+                        height: 75,
+                        width: 75,
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 50,
+                        ),
                       ),
                     ),
                   ],
