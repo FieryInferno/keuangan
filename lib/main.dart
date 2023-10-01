@@ -131,19 +131,67 @@ class Login extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 40),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(16),
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const CircleBorder(),
+                      builder: (BuildContext context) {
+                        return SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: Container(
+                              height: 400,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25),
+                                  topRight: Radius.circular(25),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    TextWidget('Gunakan Password'),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 16,
+                                      ),
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: 'Password',
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 5,
                   ),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(16),
+                    ),
+                  ),
+                  child: const TextWidget('Gunakan Password'),
                 ),
-                child: const TextWidget('Gunakan Password'),
               ),
             ],
           )
