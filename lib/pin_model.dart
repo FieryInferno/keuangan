@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class PinModel extends ChangeNotifier {
   List<int> pin = [];
+  bool showPinSalah = false;
 
   void add(int number) {
     if (pin.length < 6) {
@@ -15,5 +16,11 @@ class PinModel extends ChangeNotifier {
       pin.removeLast();
       notifyListeners();
     }
+  }
+
+  void removeAll() {
+    pin = [];
+
+    Future.delayed(const Duration(milliseconds: 250), () => notifyListeners());
   }
 }

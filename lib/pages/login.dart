@@ -97,26 +97,45 @@ class Login extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10, bottom: 80),
+            margin: const EdgeInsets.only(top: 10),
             child: Consumer<PinModel>(
               builder: (context, value, child) {
                 List<int> pin = value.pin;
 
                 if (pin.length == 6) {
-                  Future.delayed(const Duration(seconds: 1), () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const Home(),
-                      ),
-                    );
-                  });
+                  if (pin.join('') == '336699') {
+                    Future.delayed(const Duration(seconds: 1), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const Home(),
+                        ),
+                      );
+                    });
+                  } else {
+                    Provider.of<PinModel>(context).showPinSalah = true;
+                    Provider.of<PinModel>(context, listen: false).removeAll();
+                  }
                 }
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: loadCirclePin(pin.length),
                 );
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 35),
+            child: Consumer<PinModel>(
+              builder: (context, value, child) {
+                return value.showPinSalah
+                    ? Text(
+                        'Pin salah',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.red[900], fontSize: 20),
+                      )
+                    : const SizedBox();
               },
             ),
           ),
