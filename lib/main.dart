@@ -134,16 +134,19 @@ class Login extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      shape: const CircleBorder(),
-                      builder: (BuildContext context) {
-                        return SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom),
-                            child: Container(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(25))),
+                    isDismissible: false,
+                    builder: (BuildContext context) {
+                      return SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                          ),
+                          child: Container(
                               height: 400,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
@@ -155,10 +158,19 @@ class Login extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    TextWidget('Gunakan Password'),
-                                    Padding(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const TextWidget('Gunakan Password'),
+                                        GestureDetector(
+                                          onTap: () => Navigator.pop(context),
+                                          child: const Icon(Icons.close),
+                                        ),
+                                      ],
+                                    ),
+                                    const Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 8,
                                         vertical: 16,
@@ -169,14 +181,18 @@ class Login extends StatelessWidget {
                                           hintText: 'Password',
                                         ),
                                       ),
-                                    )
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const TextWidget('close'),
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ),
-                          ),
-                        );
-                      });
+                              )),
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Container(
                   margin: const EdgeInsets.only(top: 40),
