@@ -26,6 +26,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class InputPassword extends StatefulWidget {
+  const InputPassword({super.key});
+
+  @override
+  State<InputPassword> createState() => _InputPassword();
+}
+
+class _InputPassword extends State<InputPassword> {
+  bool _showPassword = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      obscureText: !_showPassword,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: 'Password',
+        suffixIcon: GestureDetector(
+          onTap: () => setState(() => _showPassword = !_showPassword),
+          child: Icon(_showPassword ? Icons.visibility_off : Icons.visibility),
+        ),
+      ),
+    );
+  }
+}
+
 class Login extends StatelessWidget {
   const Login({super.key});
 
@@ -171,21 +197,11 @@ class Login extends StatelessWidget {
                                       ],
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 16,
-                                      ),
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          hintText: 'Password',
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 16,
                                         ),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const TextWidget('close'),
-                                    ),
+                                        child: InputPassword()),
                                   ],
                                 ),
                               )),
