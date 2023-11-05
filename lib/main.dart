@@ -173,38 +173,88 @@ class Login extends StatelessWidget {
                             bottom: MediaQuery.of(context).viewInsets.bottom,
                           ),
                           child: Container(
-                              height: 400,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(25),
-                                  topRight: Radius.circular(25),
-                                ),
+                            height: 300,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const TextWidget('Gunakan Password'),
-                                        GestureDetector(
-                                          onTap: () => Navigator.pop(context),
-                                          child: const Icon(Icons.close),
-                                        ),
-                                      ],
-                                    ),
-                                    const Padding(
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const TextWidget('Gunakan Password'),
+                                          GestureDetector(
+                                            onTap: () => Navigator.pop(context),
+                                            child: const Icon(Icons.close),
+                                          ),
+                                        ],
+                                      ),
+                                      const Padding(
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 8,
                                           vertical: 16,
                                         ),
-                                        child: InputPassword()),
-                                  ],
-                                ),
-                              )),
+                                        child: InputPassword(),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text(
+                                    'Lupa Password?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => {},
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(5),
+                                              ),
+                                              color: Colors.amber[800],
+                                            ),
+                                            height: 50,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: const [
+                                                Text(
+                                                  'Login',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
