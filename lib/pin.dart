@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PinModel extends ChangeNotifier {
+class Pin extends ChangeNotifier {
   List<int> pin = [];
   bool showPinSalah = false;
 

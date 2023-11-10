@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keuangan/pin_model.dart';
+import 'package:keuangan/pin.dart';
 import 'package:provider/provider.dart';
 import './pages/login.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) => PinModel(),
+          create: (context) => Pin(),
           child: const Login(),
         ),
       ),

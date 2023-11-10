@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/components/text_widget.dart';
-import 'package:keuangan/pin_model.dart';
+import 'package:keuangan/pin.dart';
 import 'package:provider/provider.dart';
 
 class ButtonPin extends StatelessWidget {
@@ -11,7 +11,7 @@ class ButtonPin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Provider.of<PinModel>(context, listen: false).add(number),
+      onTap: () => Provider.of<Pin>(context, listen: false).add(number),
       child: Container(
         height: 75,
         width: 75,
