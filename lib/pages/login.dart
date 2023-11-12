@@ -52,6 +52,19 @@ class LoginPassword extends StatefulWidget {
 class _LoginPassword extends State<LoginPassword> {
   final TextEditingController _passwordController = TextEditingController();
   bool _wrongPassword = false;
+  bool _disabledButton = true;
+
+  @override
+  void initState() {
+    _passwordController.addListener(() {
+      if (_passwordController.text.trim() == '') {
+        setState(() => _disabledButton = true);
+      } else {
+        setState(() => _disabledButton = false);
+      }
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -135,7 +148,9 @@ class _LoginPassword extends State<LoginPassword> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(5),
                             ),
-                            color: Colors.amber[800],
+                            color: _disabledButton
+                                ? Colors.grey[300]
+                                : Colors.amber[800],
                           ),
                           height: 50,
                           child: Column(
