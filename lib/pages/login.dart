@@ -53,6 +53,7 @@ class _LoginPassword extends State<LoginPassword> {
   final TextEditingController _passwordController = TextEditingController();
   bool _wrongPassword = false;
   bool _disabledButton = true;
+  User user = User();
 
   @override
   void initState() {
@@ -116,18 +117,20 @@ class _LoginPassword extends State<LoginPassword> {
                     ),
                   ],
                 ),
-                const Text(
-                  'Lupa Password?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                GestureDetector(
+                  onTap: () => user.forgotPassword(),
+                  child: const Text(
+                    'Lupa Password?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (User()
-                        .loginByPassword(_passwordController.text.trim())) {
+                    if (user.loginByPassword(_passwordController.text.trim())) {
                       Future.delayed(const Duration(seconds: 1), () {
                         Navigator.push(
                           context,
