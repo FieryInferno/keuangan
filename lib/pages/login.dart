@@ -99,7 +99,10 @@ class _LoginPassword extends State<LoginPassword> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const TextWidget('Gunakan Password'),
+                        const TextWidget(
+                          'Gunakan Password',
+                          weight: FontWeight.w900,
+                        ),
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
                           child: const Icon(Icons.close),
@@ -119,13 +122,9 @@ class _LoginPassword extends State<LoginPassword> {
                 ),
                 GestureDetector(
                   onTap: () => user.forgotPassword(),
-                  child: const Text(
+                  child: const TextWidget(
                     'Lupa Password?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                    weight: FontWeight.w900,
                   ),
                 ),
                 GestureDetector(
@@ -159,14 +158,9 @@ class _LoginPassword extends State<LoginPassword> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
-                              Text(
+                              TextWidget(
                                 'Login',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                weight: FontWeight.w900,
                               ),
                             ],
                           ),
@@ -239,14 +233,9 @@ class Login extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Text(
+          const TextWidget(
             'Masukan PIN kamu',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-              decoration: TextDecoration.none,
-            ),
+            weight: FontWeight.w900,
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -282,10 +271,10 @@ class Login extends StatelessWidget {
             child: Consumer<Pin>(
               builder: (context, value, child) {
                 return value.showPinSalah
-                    ? Text(
+                    ? const TextWidget(
                         'Pin salah',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.red[900], fontSize: 20),
+                        weight: FontWeight.w600,
+                        color: Colors.red,
                       )
                     : const SizedBox();
               },
@@ -347,7 +336,10 @@ class Login extends StatelessWidget {
                       Radius.circular(16),
                     ),
                   ),
-                  child: const TextWidget('Gunakan Password'),
+                  child: const TextWidget(
+                    'Gunakan Password',
+                    weight: FontWeight.w900,
+                  ),
                 ),
               ),
             ],
