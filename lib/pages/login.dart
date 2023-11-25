@@ -115,8 +115,9 @@ class _LoginPassword extends State<LoginPassword> {
                         vertical: 16,
                       ),
                       child: InputPassword(
-                          controller: _passwordController,
-                          wrongPassword: _wrongPassword),
+                        controller: _passwordController,
+                        wrongPassword: _wrongPassword,
+                      ),
                     ),
                   ],
                 ),
@@ -124,22 +125,28 @@ class _LoginPassword extends State<LoginPassword> {
                   onTap: () => user.forgotPassword(),
                   child: const TextWidget(
                     'Lupa Password?',
-                    weight: FontWeight.w900,
+                    weight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (user.loginByPassword(_passwordController.text.trim())) {
-                      Future.delayed(const Duration(seconds: 1), () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => const Home(),
-                          ),
-                        );
-                      });
-                    } else {
-                      setState(() => _wrongPassword = true);
+                    String password = _passwordController.text.trim();
+
+                    if (password != '') {
+                      if (user
+                          .loginByPassword(_passwordController.text.trim())) {
+                        Future.delayed(const Duration(seconds: 1), () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => const Home(),
+                            ),
+                          );
+                        });
+                      } else {
+                        setState(() => _wrongPassword = true);
+                      }
                     }
                   },
                   child: Row(
@@ -222,7 +229,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 200),
+      padding: const EdgeInsets.only(top: 150),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -267,7 +274,8 @@ class Login extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 35),
+            height: 30,
+            margin: const EdgeInsets.only(top: 10, bottom: 20),
             child: Consumer<Pin>(
               builder: (context, value, child) {
                 return value.showPinSalah

@@ -5,6 +5,7 @@ class TextWidget extends StatelessWidget {
   final double size;
   final FontWeight weight;
   final Color color;
+  final TextDecoration decoration;
 
   const TextWidget(
     this._text, {
@@ -12,6 +13,7 @@ class TextWidget extends StatelessWidget {
     this.size = 20,
     this.weight = FontWeight.normal,
     this.color = Colors.black,
+    this.decoration = TextDecoration.none,
   });
 
   @override
@@ -22,7 +24,7 @@ class TextWidget extends StatelessWidget {
         color: color,
         fontWeight: weight,
         fontSize: size,
-        decoration: TextDecoration.none,
+        decoration: decoration,
         fontFamily: 'Nunito',
       ),
     );
