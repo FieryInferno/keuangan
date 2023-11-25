@@ -54,8 +54,7 @@ class _Greeting extends State<Greeting> {
   void initState() {
     super.initState();
 
-    DateTime datetime = DateTime.now().toLocal();
-    int hour = datetime.hour;
+    int hour = DateTime.now().toLocal().hour;
 
     if (hour > 0 && hour <= 9) _greet = 'Selamat pagi';
     if (hour > 9 && hour <= 15) _greet = 'Selamat siang';
@@ -131,6 +130,116 @@ class CardDashboard extends StatelessWidget {
       ),
     );
   }
+}
+
+class ButtonSlide extends StatelessWidget {
+  final String direction;
+  final Function()? onTap;
+
+  const ButtonSlide(this.direction, {super.key, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 30,
+        width: 30,
+        decoration: BoxDecoration(
+          color: Colors.grey[350],
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          direction == 'left' ? Icons.arrow_left : Icons.arrow_right,
+          size: 30,
+        ),
+      ),
+    );
+  }
+}
+
+class SlideMonthLogic {
+  static const Duration _duration = Duration(days: 30);
+
+  static DateTime subtractMonth(DateTime datetime) =>
+      datetime.subtract(_duration);
+  static DateTime addMonth(DateTime datetime) => datetime.add(_duration);
+}
+
+class _SlideMonth extends State<SlideMonth> {
+  late int _month;
+  late int _year;
+  late DateTime _datetime;
+  final List<String> _months = [
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    DateTime thisDatetime = DateTime.now().toLocal();
+    _datetime = thisDatetime;
+    _month = _datetime.month;
+    _year = _datetime.year;
+  }
+
+  void updateState(DateTime newDatetime) {
+    setState(() => _datetime = newDatetime);
+    setState(() => _month = newDatetime.month);
+    setState(() => _year = newDatetime.year);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ButtonSlide(
+          'left',
+          onTap: () => updateState(SlideMonthLogic.subtractMonth(_datetime)),
+        ),
+        const SizedBox(width: 10),
+        SizedBox(
+          width: 125,
+          child: Column(
+            children: [
+              TextWidget(_months[_month - 1], weight: FontWeight.w900),
+              TextWidget(
+                _year.toString(),
+                weight: FontWeight.w900,
+                size: 15,
+                color: Colors.amber,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 10),
+        ButtonSlide(
+          'right',
+          onTap: () => updateState(SlideMonthLogic.addMonth(_datetime)),
+        )
+      ],
+    );
+  }
+}
+
+class SlideMonth extends StatefulWidget {
+  const SlideMonth({super.key});
+
+  @override
+  State<SlideMonth> createState() => _SlideMonth();
 }
 
 class Home extends StatelessWidget {
@@ -237,38 +346,7 @@ class Home extends StatelessWidget {
                 const SizedBox(height: 20),
                 const TextWidget('Analisa Pengeluaran'),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[350],
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.arrow_left),
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
-                      children: const [
-                        TextWidget('November', weight: FontWeight.w900),
-                        TextWidget(
-                          '2023',
-                          weight: FontWeight.w900,
-                          size: 15,
-                          color: Colors.amber,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[350],
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.arrow_right),
-                    ),
-                  ],
-                )
+                const SlideMonth(),
               ],
             ),
           ),
