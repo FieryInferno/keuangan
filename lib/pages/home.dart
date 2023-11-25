@@ -162,78 +162,115 @@ class Home extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 50, left: 12.5, right: 12.5),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Greeting(),
-              Row(
-                children: const [
-                  Icon(Icons.payments),
-                  SizedBox(width: 5),
-                  TextWidget(
-                    'APLIKASI KEUANGAN',
-                    weight: FontWeight.w600,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              const TextWidget('Dashboard'),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  CardDashboard(
-                    color: Color(0xFFFFC312),
-                    title: 'Pemasukan',
-                    icon: Icons.paid,
-                  ),
-                  SizedBox(width: 10),
-                  CardDashboard(
-                    color: Color(0xFFEA2027),
-                    textColor: Colors.white,
-                    title: 'Pengeluaran',
-                    icon: Icons.price_change,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(5),
-                        ),
-                        color: const Color(0xFF3ae374),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF3ae374).withOpacity(0.5),
-                            blurRadius: 10,
-                            offset: const Offset(4, 4),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.all(5),
-                      child: Row(
-                        children: const [
-                          TextWidget(
-                            'Total Saldo',
-                            size: 15,
-                          ),
-                          SizedBox(width: 10),
-                          TextWidget(
-                            'Rp. 10.000,00',
-                            size: 15,
-                            weight: FontWeight.w900,
-                          ),
-                        ],
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Greeting(),
+                Row(
+                  children: const [
+                    Icon(Icons.payments),
+                    SizedBox(width: 5),
+                    TextWidget(
+                      'APLIKASI KEUANGAN',
+                      weight: FontWeight.w600,
                     ),
-                  )
-                ],
-              )
-            ]),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const TextWidget('Dashboard'),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    CardDashboard(
+                      color: Color(0xFFFFC312),
+                      title: 'Pemasukan',
+                      icon: Icons.paid,
+                    ),
+                    SizedBox(width: 10),
+                    CardDashboard(
+                      color: Color(0xFFEA2027),
+                      textColor: Colors.white,
+                      title: 'Pengeluaran',
+                      icon: Icons.price_change,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          color: const Color(0xFF3ae374),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF3ae374).withOpacity(0.5),
+                              blurRadius: 10,
+                              offset: const Offset(4, 4),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          children: const [
+                            TextWidget(
+                              'Total Saldo',
+                              size: 15,
+                            ),
+                            SizedBox(width: 10),
+                            TextWidget(
+                              'Rp. 10.000,00',
+                              size: 15,
+                              weight: FontWeight.w900,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const TextWidget('Analisa Pengeluaran'),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[350],
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.arrow_left),
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      children: const [
+                        TextWidget('November', weight: FontWeight.w900),
+                        TextWidget(
+                          '2023',
+                          weight: FontWeight.w900,
+                          size: 15,
+                          color: Colors.amber,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[350],
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.arrow_right),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
           Positioned(
             bottom: 0,
