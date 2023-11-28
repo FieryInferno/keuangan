@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:keuangan/components/text_widget.dart';
 
@@ -24,7 +25,7 @@ class ItemNavbar extends StatelessWidget {
               color: Colors.amber,
             )
           : null,
-      child: Column(
+      child: Row(
         children: [
           Icon(
             icon,
@@ -242,6 +243,87 @@ class SlideMonth extends StatefulWidget {
   State<SlideMonth> createState() => _SlideMonth();
 }
 
+class _DonutChartState extends State<DonutChart> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 300,
+          child: Stack(
+            children: [
+              PieChart(
+                PieChartData(
+                  startDegreeOffset: 250,
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 100,
+                  sections: [
+                    PieChartSectionData(
+                      value: 45,
+                      color: Colors.greenAccent,
+                      radius: 45,
+                      showTitle: false,
+                    ),
+                    PieChartSectionData(
+                      value: 35,
+                      color: Colors.blue.shade900,
+                      radius: 25,
+                      showTitle: false,
+                    ),
+                    PieChartSectionData(
+                      value: 20,
+                      color: Colors.grey.shade400,
+                      radius: 20,
+                      showTitle: false,
+                    ),
+                  ],
+                ),
+              ),
+              Positioned.fill(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 160,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade200,
+                            blurRadius: 10.0,
+                            spreadRadius: 10.0,
+                            offset: const Offset(3.0, 3.0),
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "2305",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class DonutChart extends StatefulWidget {
+  const DonutChart({Key? key}) : super(key: key);
+
+  @override
+  State<DonutChart> createState() => _DonutChartState();
+}
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -347,6 +429,7 @@ class Home extends StatelessWidget {
                 const TextWidget('Analisa Pengeluaran'),
                 const SizedBox(height: 20),
                 const SlideMonth(),
+                const DonutChart(),
               ],
             ),
           ),
