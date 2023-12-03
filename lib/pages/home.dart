@@ -291,113 +291,110 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            right: 0,
-            width: 150,
-            height: 10,
-            child: Container(
-              decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.amber,
-                    blurRadius: 60,
-                    spreadRadius: 50,
+    return Stack(
+      children: [
+        Positioned(
+          top: 0,
+          right: 0,
+          width: 150,
+          height: 10,
+          child: Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.amber,
+                  blurRadius: 60,
+                  spreadRadius: 50,
+                )
+              ],
+              color: Colors.amber,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 50, left: 12.5, right: 12.5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Greeting(),
+              Row(
+                children: const [
+                  Icon(Icons.payments),
+                  SizedBox(width: 5),
+                  TextWidget(
+                    'APLIKASI KEUANGAN',
+                    weight: FontWeight.w600,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              const TextWidget('Dashboard'),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  CardDashboard(
+                    color: Color(0xFFFFC312),
+                    title: 'Pemasukan',
+                    icon: Icons.paid,
+                  ),
+                  SizedBox(width: 10),
+                  CardDashboard(
+                    color: Color(0xFFEA2027),
+                    textColor: Colors.white,
+                    title: 'Pengeluaran',
+                    icon: Icons.price_change,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                        color: const Color(0xFF3ae374),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF3ae374).withOpacity(0.5),
+                            blurRadius: 10,
+                            offset: const Offset(4, 4),
+                          ),
+                        ],
+                      ),
+                      padding: const EdgeInsets.all(5),
+                      child: Row(
+                        children: const [
+                          TextWidget(
+                            'Total Saldo',
+                            size: 15,
+                          ),
+                          SizedBox(width: 10),
+                          TextWidget(
+                            'Rp. 10.000,00',
+                            size: 15,
+                            weight: FontWeight.w900,
+                          ),
+                        ],
+                      ),
+                    ),
                   )
                 ],
-                color: Colors.amber,
               ),
-            ),
+              const SizedBox(height: 20),
+              const TextWidget('Analisa Pengeluaran'),
+              const SizedBox(height: 20),
+              const SlideMonth(),
+              const DonutChart(),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 50, left: 12.5, right: 12.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Greeting(),
-                Row(
-                  children: const [
-                    Icon(Icons.payments),
-                    SizedBox(width: 5),
-                    TextWidget(
-                      'APLIKASI KEUANGAN',
-                      weight: FontWeight.w600,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const TextWidget('Dashboard'),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    CardDashboard(
-                      color: Color(0xFFFFC312),
-                      title: 'Pemasukan',
-                      icon: Icons.paid,
-                    ),
-                    SizedBox(width: 10),
-                    CardDashboard(
-                      color: Color(0xFFEA2027),
-                      textColor: Colors.white,
-                      title: 'Pengeluaran',
-                      icon: Icons.price_change,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                          color: const Color(0xFF3ae374),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF3ae374).withOpacity(0.5),
-                              blurRadius: 10,
-                              offset: const Offset(4, 4),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(5),
-                        child: Row(
-                          children: const [
-                            TextWidget(
-                              'Total Saldo',
-                              size: 15,
-                            ),
-                            SizedBox(width: 10),
-                            TextWidget(
-                              'Rp. 10.000,00',
-                              size: 15,
-                              weight: FontWeight.w900,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const TextWidget('Analisa Pengeluaran'),
-                const SizedBox(height: 20),
-                const SlideMonth(),
-                const DonutChart(),
-              ],
-            ),
-          ),
-          const Navbar(),
-        ],
-      ),
+        ),
+        const Navbar(),
+      ],
     );
   }
 }

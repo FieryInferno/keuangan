@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/components/text_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:keuangan/providers/menu.dart';
 
 class ItemNavbar extends StatelessWidget {
   final IconData icon;
@@ -24,10 +25,9 @@ class ItemNavbar extends StatelessWidget {
         Offset widgetPosition = renderBox.localToGlobal(Offset.zero);
 
         // Gunakan widgetPosition untuk informasi posisi
-        Provider.of<Menu>(
-          context,
-          listen: false,
-        ).setPosition(widgetPosition.dx);
+        Menu menu = Provider.of<Menu>(context, listen: false);
+        menu.position = widgetPosition.dx;
+        menu.menu = title;
       },
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -48,65 +48,53 @@ class ItemNavbar extends StatelessWidget {
   }
 }
 
-class Menu extends ChangeNotifier {
-  double position = 40;
-
-  void setPosition(double pos) {
-    position = pos;
-    notifyListeners();
-  }
-}
-
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Menu(),
-      child: Positioned(
-        bottom: 0,
-        right: 0,
-        left: 0,
-        child: Stack(
-          children: [
-            Consumer<Menu>(builder: ((context, value, child) {
-              return AnimatedPositioned(
-                top: 0,
-                bottom: 5,
-                left: value.position,
-                width: 100,
-                duration: const Duration(milliseconds: 75),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.amber,
-                  ),
+    return Positioned(
+      bottom: 0,
+      right: 0,
+      left: 0,
+      child: Stack(
+        children: [
+          Consumer<Menu>(builder: ((context, value, child) {
+            return AnimatedPositioned(
+              top: 0,
+              bottom: 5,
+              left: value.position,
+              width: 100,
+              duration: const Duration(milliseconds: 75),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.amber,
                 ),
-              );
-            })),
-            Container(
-              height: 40,
-              margin: const EdgeInsets.only(bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ItemNavbar(
-                    icon: Icons.home,
-                    title: 'Beranda',
-                    active: true,
-                  ),
-                  ItemNavbar(
-                    icon: Icons.receipt_long,
-                    title: 'Transaksi',
-                  ),
-                ],
               ),
+            );
+          })),
+          Container(
+            height: 40,
+            margin: const EdgeInsets.only(bottom: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ItemNavbar(
+                  icon: Icons.home,
+                  title: 'Beranda',
+                  active: true,
+                ),
+                ItemNavbar(
+                  icon: Icons.receipt_long,
+                  title: 'Transaksi',
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

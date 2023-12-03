@@ -1,8 +1,8 @@
-import './home.dart';
+import './layout.dart';
 import './../user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:keuangan/pin.dart';
+import 'package:keuangan/providers/pin.dart';
 import 'package:keuangan/components/button_pin.dart';
 import 'package:keuangan/components/circle_pin.dart';
 import 'package:keuangan/components/text_widget.dart';
@@ -140,7 +140,7 @@ class _LoginPassword extends State<LoginPassword> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => const Home(),
+                              builder: (BuildContext context) => Layout(),
                             ),
                           );
                         });
@@ -256,7 +256,7 @@ class Login extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => const Home(),
+                          builder: (BuildContext context) => Layout(),
                         ),
                       );
                     });

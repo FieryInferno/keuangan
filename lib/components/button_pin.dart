@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keuangan/components/text_widget.dart';
-import 'package:keuangan/pin.dart';
+import 'package:keuangan/providers/pin.dart';
 import 'package:provider/provider.dart';
 
 class ButtonPin extends StatelessWidget {

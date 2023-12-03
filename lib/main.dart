@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keuangan/pin.dart';
+import 'package:keuangan/providers/pin.dart';
 import 'package:provider/provider.dart';
 import './pages/login.dart';
 
